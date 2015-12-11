@@ -1,4 +1,4 @@
-var Store = reqire("flux/util").Store,
+var Store = require("flux/utils").Store,
     AppDispatcher = require("../dispatcher/dispatcher"),
     BenchConstants = require("../constants/bench_constants");
 

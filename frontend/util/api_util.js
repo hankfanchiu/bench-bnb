@@ -2,7 +2,7 @@ var ApiActions = require("../actions/api_actions");
 
 var ApiUtil = {
   fetchBenches: function () {
-    $.get("/benches", {}, function (benches) {
+    $.get("/api/benches", {}, function (benches) {
       ApiActions.receiveAll(benches);
     });
   }

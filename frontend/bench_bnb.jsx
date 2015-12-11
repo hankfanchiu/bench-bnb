@@ -1,6 +1,9 @@
 var React = require("react"),
-    ReactDOM = require("react-dom");
+    ReactDOM = require("react-dom"),
+    ApiUtil = require("./util/api_util");
 
-document.on("DOMContentLoaded", function () {
+var Index = require("./components/index");
 
+document.addEventListener("DOMContentLoaded", function () {
+  ReactDOM.render(<Index />, document.getElementById("content"));
 });
