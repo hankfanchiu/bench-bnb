@@ -13,7 +13,7 @@ var Map = React.createClass({
 
     this.map = new google.maps.Map(map, mapOptions);
 
-    this.listenForIdle();
+    this.addMapListener();
     this.listenerToken = BenchStore.addListener(this._benchesChanged);
   },
 
@@ -25,8 +25,29 @@ var Map = React.createClass({
     BenchStore.all().forEach(this.addBenchMarker);
   },
 
+  addMapListener: function () {
+    google.maps.event.addListener(this.map, "idle", this.listenForIdle);
+  },
+
   listenForIdle: function () {
-    google.maps.event.addListener(this.map, "idle", ApiUtil.fetchBenches);
+    ApiUtil.fetchBenches(this.getBounds());
+  },
+
+  getBounds: function () {
+    var latLngBounds = this.map.getBounds();
+    var northEastLatLng = latLngBounds.getNorthEast();
+    var southWestLatLng = latLngBounds.getSouthWest();
+
+    return {
+      northEast: {
+        lat: northEastLatLng.lat(),
+        lng: northEastLatLng.lng()
+      },
+      southWest: {
+        lat: southWestLatLng.lat(),
+        lng: southWestLatLng.lng()
+      }
+    };
   },
 
   addBenchMarker: function (bench) {

@@ -12,4 +12,11 @@
 
 class Bench < ActiveRecord::Base
   validates :description, :lat, :lng, presence: true
+
+  def self.in_bounds(bounds)
+    sw = bounds[:southWest]
+    ne = bounds[:northEast]
+
+    self.where(lat: sw[:lat]..ne[:lat], lng: sw[:lng]..ne[:lng])
+  end
 end
