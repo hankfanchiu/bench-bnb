@@ -7,20 +7,26 @@ var Index = React.createClass({
   },
 
   componentDidMount: function () {
-    this.listenerToken = BenchStore.addListener(this._benchesChanged);
+    this.listenerToken = BenchStore.addListener(this._onChange);
   },
 
   componentWillUnmount: function () {
     this.listenerToken.remove();
   },
 
-  _benchesChanged: function () {
+  _onChange: function () {
     this.setState({ benches: BenchStore.all() });
   },
 
   render: function () {
+    var benches = this.state.benches.map(function(bench) {
+      return (
+        <li className="bench" key={ bench.id }>{ bench.description }</li>
+      );
+    });
+
     return (
-      <div>Hello</div>
+      <ol className="index">{ benches }</ol>
     );
   }
 });

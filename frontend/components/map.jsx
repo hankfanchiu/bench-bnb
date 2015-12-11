@@ -1,9 +1,13 @@
 var React = require("react"),
     ReactDOM = require("react-dom"),
     ApiUtil = require("../util/api_util"),
-    BenchStore = require("../stores/bench");
+    MarkerStore = require("../stores/marker");
 
 var Map = React.createClass({
+  getInitialState: function () {
+    return { markers: MarkerStore.all() };
+  },
+
   componentDidMount: function () {
     var map = ReactDOM.findDOMNode(this.refs.map);
     var mapOptions = {
@@ -14,15 +18,17 @@ var Map = React.createClass({
     this.map = new google.maps.Map(map, mapOptions);
 
     this.addMapListener();
-    this.listenerToken = BenchStore.addListener(this._benchesChanged);
+    this.listenerToken = MarkerStore.addListener(this._onChange);
   },
 
   componentWillUnmount: function () {
     this.listenerToken.remove();
   },
 
-  _benchesChanged: function () {
-    BenchStore.all().forEach(this.addBenchMarker);
+  _onChange: function () {
+    this.clearMarkers();
+    this.setState({ markers: MarkerStore.all() });
+    this.addMarkers();
   },
 
   addMapListener: function () {
@@ -50,10 +56,18 @@ var Map = React.createClass({
     };
   },
 
-  addBenchMarker: function (bench) {
-    var pos = new google.maps.LatLng(bench.lat, bench.lng);
+  clearMarkers: function () {
+    this.state.markers.forEach(function (marker) {
+      marker.setMap(null);
+    });
+  },
 
-    new google.maps.Marker({position: pos, map: this.map});
+  addMarkers: function () {
+    var map = this.map;
+
+    this.state.markers.forEach(function (marker) {
+      marker.setMap(map);
+    });
   },
 
   render: function () {
