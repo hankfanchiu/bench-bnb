@@ -2,8 +2,8 @@ var React = require("react"),
     ReactDOM = require("react-dom"),
     ApiUtil = require("./util/api_util");
 
-var Index = require("./components/index");
+var Search = require("./components/search");
 
 document.addEventListener("DOMContentLoaded", function () {
-  ReactDOM.render(<Index />, document.getElementById("content"));
+  ReactDOM.render(<Search />, document.getElementById("content"));
 });

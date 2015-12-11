@@ -22,6 +22,4 @@ var resetBenches = function (benches) {
   BenchStore.__emitChange();
 };
 
-window.BenchStore = BenchStore;
-
 module.exports = BenchStore;
