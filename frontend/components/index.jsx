@@ -1,6 +1,5 @@
 var React = require("react"),
-    BenchStore = require("../stores/bench"),
-    ApiUtil = require("../util/api_util");
+    BenchStore = require("../stores/bench");
 
 var Index = React.createClass({
   getInitialState: function () {
@@ -9,7 +8,6 @@ var Index = React.createClass({
 
   componentDidMount: function () {
     this.listenerToken = BenchStore.addListener(this._benchesChanged);
-    ApiUtil.fetchBenches();
   },
 
   componentWillUnmount: function () {
