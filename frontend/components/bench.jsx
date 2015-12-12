@@ -25,11 +25,7 @@ var Bench = React.createClass({
   },
 
   render: function () {
-    var cls = "bench";
-
-    if ( this.state.hover ) {
-      cls += " hover";
-    }
+    var cls = (this.state.hover ? "bench" : "bench hover");
 
     return (
       <li className={ cls }
