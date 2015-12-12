@@ -1,10 +1,19 @@
 var React = require("react"),
     ReactDOM = require("react-dom"),
-    ApiUtil = require("./util/api_util"),
+    Router = require("react-router"),
+    Route = require("react-router").Route,
+    IndexRoute = require("react-router").IndexRoute,
+    App = require("./components/app"),
     Search = require("./components/search");
 
-var content = document.getElementById("content");
+var router = (
+  <Router>
+    <Route path="/" component={ App }>
+      <IndexRoute component={ Search } />
+    </Route>
+  </Router>
+);
 
 document.addEventListener("DOMContentLoaded", function () {
-  ReactDOM.render(<Search />, content);
+  ReactDOM.render(<Search />, document.getElementById("content"));
 });
