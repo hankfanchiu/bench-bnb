@@ -16,9 +16,18 @@
 
 html, body {
   height: 100%;
+  font-family: "Open Sans";
 }
 
 div.map {
   width: 500px;
   height: 500px;
+}
+
+li.bench {
+
+}
+
+li.hover {
+  font-weight: bold;
 }

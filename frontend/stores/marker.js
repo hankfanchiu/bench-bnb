@@ -2,7 +2,7 @@ var Store = require("flux/utils").Store,
     AppDispatcher = require("../dispatcher/dispatcher"),
     BenchConstants = require("../constants/bench_constants");
 
-var _markers = [];
+var _markers = {};
 var MarkerStore = new Store(AppDispatcher);
 
 MarkerStore.__onDispatch = function (payload) {
@@ -14,14 +14,23 @@ MarkerStore.__onDispatch = function (payload) {
 };
 
 MarkerStore.all = function () {
-  return _markers.slice();
+  var markerClone = {}
+
+  Object.keys(_markers).forEach(function (key) {
+    markerClone[key] = _markers[key];
+  });
+
+  return markerClone;
 };
 
 var resetMarkers = function (benches) {
-  _markers = [];
+  var marker;
+
+  _markers = {};
 
   benches.forEach(function (bench) {
-    _markers.push(createMarker(bench));
+    marker = createMarker(bench);
+    _markers[bench.id] = marker;
   });
 
   MarkerStore.__emitChange();

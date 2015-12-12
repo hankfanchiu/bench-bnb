@@ -57,16 +57,19 @@ var Map = React.createClass({
   },
 
   clearMarkers: function () {
-    this.state.markers.forEach(function (marker) {
-      marker.setMap(null);
+    var markers = this.state.markers;
+
+    Object.keys(markers).forEach(function (id) {
+      markers[id].setMap(null);
     });
   },
 
   addMarkers: function () {
     var map = this.map;
+    var markers = this.state.markers;
 
-    this.state.markers.forEach(function (marker) {
-      marker.setMap(map);
+    Object.keys(markers).forEach(function (id) {
+      markers[id].setMap(map);
     });
   },
 
