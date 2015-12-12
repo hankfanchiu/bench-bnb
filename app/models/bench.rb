@@ -17,6 +17,7 @@ class Bench < ActiveRecord::Base
     sw = bounds[:southWest]
     ne = bounds[:northEast]
 
-    self.where(lat: sw[:lat]..ne[:lat], lng: sw[:lng]..ne[:lng])
+    self.where(lat: sw[:lat]..ne[:lat])
+      .where(lng: sw[:lng]..ne[:lng])
   end
 end
