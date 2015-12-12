@@ -24,13 +24,13 @@ var Index = React.createClass({
     var marker;
     var markers = MarkerStore.all();
 
-    var benchIndexItems = this.state.benches.map(function (bench) {
+    var benches = this.state.benches.map(function (bench) {
       marker = markers[bench.id];
 
       return <Bench key={ bench.id } bench={ bench } marker={ marker } />;
     });
 
-    return benchIndexItems;
+    return benches;
   },
 
   render: function () {

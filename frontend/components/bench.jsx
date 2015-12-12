@@ -6,21 +6,15 @@ var Bench = React.createClass({
     return { hover: false };
   },
 
-  handleMouseEnter: function () {
-    var blueUrl = "http://maps.google.com/mapfiles/ms/icons/blue-dot.png";
-
-    this.props.marker.setIcon(blueUrl);
-    this.toggleHover();
-  },
-
-  handleMouseLeave: function () {
-    var redUrl = "http://maps.google.com/mapfiles/ms/icons/red-dot.png";
-
-    this.props.marker.setIcon(redUrl);
-    this.toggleHover();
-  },
-
   toggleHover: function () {
+    var marker = this.props.marker;
+
+    if (marker.getAnimation()) {
+      marker.setAnimation(null);
+    } else {
+      marker.setAnimation(google.maps.Animation.BOUNCE);
+    }
+
     this.setState({ hover: !this.state.hover });
   },
 
@@ -28,12 +22,13 @@ var Bench = React.createClass({
     var cls = (this.state.hover ? "bench hover" : "bench");
 
     return (
-      <li className={ cls }
-        onMouseEnter={ this.handleMouseEnter }
-        onMouseLeave={ this.handleMouseLeave }>
+      <li className={ cls }>
+        <a href="#"
+          onMouseEnter={ this.toggleHover }
+          onMouseLeave={ this.toggleHover }>
 
-        { this.props.bench.description }
-
+          { this.props.bench.description }
+        </a>
       </li>
     );
   }
