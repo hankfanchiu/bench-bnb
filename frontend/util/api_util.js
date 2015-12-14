@@ -5,6 +5,12 @@ var ApiUtil = {
     $.get("/api/benches", { bounds: bounds }, function (benches) {
       ApiActions.receiveAll(benches);
     });
+  },
+
+  createBench: function (bench) {
+    $.post("/api/benches", { bench: bench }, function (bench) {
+      ApiActions.receiveNewBench(bench);
+    });
   }
 };
 

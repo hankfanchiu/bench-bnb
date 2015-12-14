@@ -4,12 +4,14 @@ var React = require("react"),
     Route = require("react-router").Route,
     IndexRoute = require("react-router").IndexRoute,
     App = require("./components/app"),
-    Search = require("./components/search");
+    Search = require("./components/search"),
+    BenchForm = require("./components/bench_form");
 
 var router = (
   <Router>
     <Route path="/" component={ App }>
       <IndexRoute component={ Search } />
+      <Route path="benches/new" component={ BenchForm } />
     </Route>
   </Router>
 );

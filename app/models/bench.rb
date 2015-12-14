@@ -8,10 +8,11 @@
 #  lng         :float            not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
+#  seating     :integer          default(1), not null
 #
 
 class Bench < ActiveRecord::Base
-  validates :description, :lat, :lng, presence: true
+  validates :description, :lat, :lng, :seating, presence: true
 
   def self.in_bounds(bounds)
     sw = bounds[:southWest]

@@ -10,6 +10,9 @@ BenchStore.__onDispatch = function (payload) {
     case BenchConstants.BENCHES_RECEIVED:
       resetBenches(payload.benches);
       break;
+    case BenchConstants.NEW_BENCH_RECEIVED:
+      addBench(payload.bench);
+      break;
   };
 };
 
@@ -19,6 +22,11 @@ BenchStore.all = function () {
 
 var resetBenches = function (benches) {
   _benches = benches;
+  BenchStore.__emitChange();
+};
+
+var addBench = function (bench) {
+  _benches.push(bench);
   BenchStore.__emitChange();
 };
 
