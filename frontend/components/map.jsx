@@ -17,7 +17,7 @@ var Map = React.createClass({
 
     this.map = new google.maps.Map(map, mapOptions);
 
-    this.addMapListener();
+    this.addMapListeners();
     this.listenerToken = MarkerStore.addListener(this._onChange);
   },
 
@@ -31,12 +31,21 @@ var Map = React.createClass({
     this.addMarkers();
   },
 
-  addMapListener: function () {
+  addMapListeners: function () {
     google.maps.event.addListener(this.map, "idle", this.listenForIdle);
+    google.maps.event.addListener(this.map, "click", this.listenForClick);
   },
 
-  listenForIdle: function () {
+  listenForIdle: function (e) {
     ApiUtil.fetchBenches(this.getBounds());
+  },
+
+  listenForClick: function (e) {
+    var lat = e.latLng.lat();
+    var lng = e.latLng.lng();
+    var coords = {lat: lat, lng: lng};
+
+    this.props.clickMapHandler(coords);
   },
 
   getBounds: function () {

@@ -3,10 +3,14 @@ var React = require("react"),
     Index = require("./index");
 
 var Search = React.createClass({
+  clickMapHandler: function (coords) {
+    this.props.history.pushState(null, "benches/new", coords)
+  },
+
   render: function () {
     return (
       <div className="search">
-        <Map />
+        <Map clickMapHandler={ this.clickMapHandler } />
         <Index />
       </div>
     );

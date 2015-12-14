@@ -7,8 +7,8 @@ var BenchForm = React.createClass({
 
   getInitialState: function () {
     return {
-      lat: "",
-      lng: "",
+      lat: this.props.location.query.lat,
+      lng: this.props.location.query.lng,
       description: "",
       seating: 0
     }
@@ -37,7 +37,7 @@ var BenchForm = React.createClass({
     });
   },
 
-  seatingOption: function () {
+  seatingOptions: function () {
     var seatingOptions = [];
     for (var num = 0; num < 10; num++) {
       seatingOptions.push(
