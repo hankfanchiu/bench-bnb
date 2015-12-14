@@ -1,7 +1,8 @@
 var React = require("react"),
     ReactDOM = require("react-dom"),
     ApiUtil = require("../util/api_util"),
-    MarkerStore = require("../stores/marker");
+    MarkerStore = require("../stores/marker"),
+    FilterActions = require("../actions/filter_actions");
 
 var Map = React.createClass({
   getInitialState: function () {
@@ -37,7 +38,9 @@ var Map = React.createClass({
   },
 
   listenForIdle: function (e) {
-    ApiUtil.fetchBenches(this.getBounds());
+    var bounds = this.getBounds();
+
+    FilterActions.receiveBounds(bounds);
   },
 
   listenForClick: function (e) {

@@ -14,6 +14,10 @@
 class Bench < ActiveRecord::Base
   validates :description, :lat, :lng, :seating, presence: true
 
+  def self.filtered(bounds, min_seats, max_seats)
+    self.in_bounds(bounds).where(seating: min_seats..max_seats)
+  end
+
   def self.in_bounds(bounds)
     sw = bounds[:southWest]
     ne = bounds[:northEast]
