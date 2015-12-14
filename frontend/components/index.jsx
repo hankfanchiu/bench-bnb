@@ -1,7 +1,7 @@
 var React = require("react"),
     BenchStore = require("../stores/bench"),
     MarkerStore = require("../stores/marker"),
-    Bench = require("./bench");
+    BenchIndexItem = require("./bench_index_item");
 
 var Index = React.createClass({
   getInitialState: function () {
@@ -21,13 +21,14 @@ var Index = React.createClass({
   },
 
   benchIndexItems: function () {
-    var marker;
     var markers = MarkerStore.all();
 
     var benches = this.state.benches.map(function (bench) {
-      marker = markers[bench.id];
-
-      return <Bench key={ bench.id } bench={ bench } marker={ marker } />;
+      return (
+        <BenchIndexItem key={ bench.id }
+          bench={ bench }
+          marker={ markers[bench.id] } />
+      );
     });
 
     return benches;

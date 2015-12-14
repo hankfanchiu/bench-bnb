@@ -39,7 +39,7 @@ var Search = React.createClass({
 
   clickMapHandler: function (coords) {
     this.setState({ lat: coords.lat, lng: coords.lng });
-    this.props.history.pushState(null, "benches/new", coords)
+    this.props.history.pushState(null, "benches/new", coords);
   },
 
   render: function () {
