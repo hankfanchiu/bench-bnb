@@ -19,8 +19,10 @@ var ApiUtil = {
     });
   },
 
-  createReview: function (review) {
-    $.post("/api/reviews", {review: review}, function (review) {
+  createReview: function (bench_id, review) {
+    var url = "/api/benches/" + bench_id + "/reviews"
+
+    $.post(url, {review: review}, function (review) {
       ApiActions.receiveReview(review);
     });
   }

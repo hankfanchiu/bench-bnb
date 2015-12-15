@@ -27,4 +27,14 @@ class Bench < ActiveRecord::Base
     self.where(lat: sw[:lat]..ne[:lat])
       .where(lng: sw[:lng]..ne[:lng])
   end
+
+  def score
+    if self.reviews.empty?
+      return nil
+    else
+      score = self.reviews.average(:score)
+
+      return score.round(2)
+    end
+  end
 end

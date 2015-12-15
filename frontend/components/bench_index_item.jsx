@@ -22,7 +22,6 @@ var BenchIndexItem = React.createClass({
   handleClick: function (e) {
     var id = this.props.bench.id;
 
-    ApiUtil.fetchBench(id);
     this.history.pushState(null, "benches/" + id, {});
   },
 

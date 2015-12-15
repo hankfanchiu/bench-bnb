@@ -47,7 +47,7 @@ var addBench = function (bench) {
 };
 
 var addReviewToBench = function (review) {
-  var bench_index = _benches.findBench(review.bench_id);
+  var bench_index = findBench(review.bench_id);
   var bench_reviews = _benches[bench_index].reviews;
 
   bench_reviews[review.id] = review;
@@ -57,7 +57,7 @@ var addReviewToBench = function (review) {
 
 var findBench = function (id) {
   var index = _benches.findIndex(function (possibleBench) {
-    return possibleBench.id === bench.id;
+    return possibleBench.id === id;
   });
 
   return index;

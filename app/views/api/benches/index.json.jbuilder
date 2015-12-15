@@ -1,1 +1,1 @@
-json.array! @benches, :id, :description, :lat, :lng, :seating
+json.array! @benches, :id, :description, :lat, :lng, :seating, :score
