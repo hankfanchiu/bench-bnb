@@ -9,10 +9,17 @@ var ApiActions = {
     })
   },
 
-  receiveNewBench: function (bench) {
+  receiveBench: function (bench) {
     AppDispatcher.dispatch({
-      actionType: BenchConstants.NEW_BENCH_RECEIVED,
+      actionType: BenchConstants.BENCH_RECEIVED,
       bench: bench
+    });
+  },
+
+  receiveReview: function (review) {
+    AppDispatcher.dispatch({
+      actionType: BenchConstants.REVIEW_RECEIVED,
+      review: review
     });
   }
 };

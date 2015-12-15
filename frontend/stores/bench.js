@@ -10,8 +10,11 @@ BenchStore.__onDispatch = function (payload) {
     case BenchConstants.BENCHES_RECEIVED:
       resetBenches(payload.benches);
       break;
-    case BenchConstants.NEW_BENCH_RECEIVED:
+    case BenchConstants.BENCH_RECEIVED:
       addBench(payload.bench);
+      break;
+    case BenchConstants.REVIEW_RECEIVED:
+      addReviewToBench(payload.review);
       break;
   };
 };
@@ -32,8 +35,32 @@ var resetBenches = function (benches) {
 };
 
 var addBench = function (bench) {
-  _benches.push(bench);
+  var index = findBench(bench.id);
+
+  if (index !== -1) {
+    _benches[index] = bench;
+  } else {
+    _benches.push(bench);
+  }
+
   BenchStore.__emitChange();
+};
+
+var addReviewToBench = function (review) {
+  var bench_index = _benches.findBench(review.bench_id);
+  var bench_reviews = _benches[bench_index].reviews;
+
+  bench_reviews[review.id] = review;
+
+  BenchStore.__emitChange();
+};
+
+var findBench = function (id) {
+  var index = _benches.findIndex(function (possibleBench) {
+    return possibleBench.id === bench.id;
+  });
+
+  return index;
 };
 
 module.exports = BenchStore;

@@ -1,4 +1,5 @@
 var React = require("react"),
+    ApiUtil = require("../util/api_util"),
     History = require("react-router").History;
 
 var BenchIndexItem = React.createClass({
@@ -19,8 +20,10 @@ var BenchIndexItem = React.createClass({
   },
 
   handleClick: function (e) {
-    var url = "benches/" + this.props.bench.id;
-    this.history.pushState(null, url, {});
+    var id = this.props.bench.id;
+
+    ApiUtil.fetchBench(id);
+    this.history.pushState(null, "benches/" + id, {});
   },
 
   render: function () {

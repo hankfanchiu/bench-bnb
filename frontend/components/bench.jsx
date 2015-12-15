@@ -1,6 +1,8 @@
 var React = require("react"),
     BenchStore = require("../stores/bench"),
-    BenchMap = require("./bench_map");
+    BenchMap = require("./bench_map"),
+    ReviewForm = require("./review_form"),
+    ApiUtil = require("../util/api_util");
 
 var Bench = React.createClass({
   getInitialState: function () {

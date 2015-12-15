@@ -54,21 +54,18 @@ var BenchForm = React.createClass({
 
         <label htmlFor="bench-latitude">Latitude</label>
         <input type="text"
-          name="bench[lat]"
           id="bench-latitude"
           placeholder="Latitude"
           valueLink={ this.linkState("lat") } />
 
         <label htmlFor="bench-longitude">Longitude</label>
         <input type="text"
-          name="bench[lng]"
           id="bench-longitude"
           placeholder="Longitude"
           valueLink={ this.linkState("lng") } />
 
         <label htmlFor="bench-seating">Seating</label>
-        <select name="bench[seating]"
-          id="bench-seating"
+        <select id="bench-seating"
           defaultValue="1"
           valueLink={ this.linkState("seating") }>
 
@@ -76,8 +73,7 @@ var BenchForm = React.createClass({
         </select>
 
         <label htmlFor="bench-description">Description</label>
-        <textarea name="bench[description]"
-          valueLink={ this.linkState("description") }></textarea>
+        <textarea valueLink={ this.linkState("description") }></textarea>
 
         <input type="submit" name="Submit Bench" />
 
