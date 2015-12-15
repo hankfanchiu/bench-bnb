@@ -38,6 +38,7 @@ var SeatingFilter = React.createClass({
           onChange={ this.handleMinSeatsChange }>
 
           { this.seatingOptions() }
+
         </select>
 
         <label htmlFor="max-seats">Max. Seats</label>
@@ -47,6 +48,7 @@ var SeatingFilter = React.createClass({
           onChange={ this.handleMaxSeatsChange }>
 
           { this.seatingOptions() }
+
         </select>
 
       </form>
