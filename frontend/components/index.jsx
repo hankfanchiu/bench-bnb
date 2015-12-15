@@ -22,6 +22,7 @@ var Index = React.createClass({
 
   benchIndexItems: function () {
     var markers = MarkerStore.all();
+    var that = this;
 
     var benches = this.state.benches.map(function (bench) {
       return (

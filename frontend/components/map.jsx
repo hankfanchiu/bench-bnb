@@ -3,8 +3,11 @@ var React = require("react"),
     ApiUtil = require("../util/api_util"),
     MarkerStore = require("../stores/marker"),
     FilterActions = require("../actions/filter_actions");
+    History = require("react-router").History;
 
 var Map = React.createClass({
+  mixins: [History],
+
   getInitialState: function () {
     return { markers: MarkerStore.all() };
   },
@@ -37,20 +40,6 @@ var Map = React.createClass({
     google.maps.event.addListener(this.map, "click", this.listenForClick);
   },
 
-  listenForIdle: function (e) {
-    var bounds = this.getBounds();
-
-    FilterActions.receiveBounds(bounds);
-  },
-
-  listenForClick: function (e) {
-    var lat = e.latLng.lat();
-    var lng = e.latLng.lng();
-    var coords = {lat: lat, lng: lng};
-
-    this.props.clickMapHandler(coords);
-  },
-
   getBounds: function () {
     var latLngBounds = this.map.getBounds();
     var northEastLatLng = latLngBounds.getNorthEast();
@@ -72,17 +61,44 @@ var Map = React.createClass({
     var markers = this.state.markers;
 
     Object.keys(markers).forEach(function (id) {
+      markers[id].listener.remove();
       markers[id].setMap(null);
     });
   },
 
   addMarkers: function () {
-    var map = this.map;
+    var that = this;
     var markers = this.state.markers;
+    var marker;
 
     Object.keys(markers).forEach(function (id) {
-      markers[id].setMap(map);
+      marker = markers[id];
+      marker.id = id;
+
+      marker.setMap(that.map);
+      marker.listener = marker.addListener("click", function () {
+        that.handleMarkerClick(marker.id);
+      });
     });
+  },
+
+  listenForIdle: function (e) {
+    var bounds = this.getBounds();
+
+    FilterActions.receiveBounds(bounds);
+  },
+
+  listenForClick: function (e) {
+    var lat = e.latLng.lat();
+    var lng = e.latLng.lng();
+    var coords = {lat: lat, lng: lng};
+
+    this.props.clickMapHandler(coords);
+  },
+
+  handleMarkerClick: function (id) {
+    var url = "benches/" + id;
+    this.history.pushState(null, url, {});
   },
 
   render: function () {

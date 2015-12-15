@@ -20,6 +20,12 @@ BenchStore.all = function () {
   return _benches.slice();
 };
 
+BenchStore.find = function (id) {
+  return _benches.find(function (bench) {
+    return bench.id === id;
+  });
+};
+
 var resetBenches = function (benches) {
   _benches = benches;
   BenchStore.__emitChange();

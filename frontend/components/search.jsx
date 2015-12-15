@@ -49,7 +49,7 @@ var Search = React.createClass({
 
         <SeatingFilter />
 
-        <Index />
+        <Index history={this.props.history} />
       </div>
     );
   }

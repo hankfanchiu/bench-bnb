@@ -10,18 +10,17 @@ var BenchIndexItem = React.createClass({
 
   handleMouseOver: function (e) {
     this.props.marker.setAnimation(google.maps.Animation.BOUNCE);
-    this.setState({ isHovering: true })
+    this.setState({ isHovering: true });
   },
 
   handleMouseOut: function (e) {
     this.props.marker.setAnimation(null);
-    this.setState({ isHovering: false })
+    this.setState({ isHovering: false });
   },
 
   handleClick: function (e) {
-    var id = this.props.bench.id;
-
-    this.history.pushState(null, "benches/" + id, id);
+    var url = "benches/" + this.props.bench.id;
+    this.history.pushState(null, url, {});
   },
 
   render: function () {
@@ -29,8 +28,7 @@ var BenchIndexItem = React.createClass({
 
     return (
       <li className={ cls }>
-        <a href="#"
-          onClick={ this.handleClick }
+        <a onClick={ this.handleClick }
           onMouseOver={ this.handleMouseOver }
           onMouseOut={ this.handleMouseOut }>
 

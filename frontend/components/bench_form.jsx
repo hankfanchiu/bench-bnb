@@ -39,7 +39,7 @@ var BenchForm = React.createClass({
 
   seatingOptions: function () {
     var seatingOptions = [];
-    for (var num = 0; num < 10; num++) {
+    for (var num = 1; num < 10; num++) {
       seatingOptions.push(
         <option value={ num } key={ num }>{ num }</option>
       );
@@ -69,9 +69,8 @@ var BenchForm = React.createClass({
         <label htmlFor="bench-seating">Seating</label>
         <select name="bench[seating]"
           id="bench-seating"
+          defaultValue="1"
           valueLink={ this.linkState("seating") }>
-
-          <option></option>
 
           { this.seatingOptions() }
         </select>
