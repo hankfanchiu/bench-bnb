@@ -24,9 +24,11 @@ BenchStore.all = function () {
 };
 
 BenchStore.find = function (id) {
-  return _benches.find(function (bench) {
+  var foundBench = _benches.find(function (bench) {
     return bench.id === id;
   });
+
+  return foundBench;
 };
 
 var resetBenches = function (benches) {
